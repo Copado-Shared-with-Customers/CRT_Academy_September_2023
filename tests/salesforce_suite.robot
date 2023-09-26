@@ -11,7 +11,3 @@ ${contact_first_name}     Hidde
 ${contact_last_name}      Training
 
 *** Test Cases ***
-Login Salesforce
-    [Documentation]
-    [Tags]
-    
