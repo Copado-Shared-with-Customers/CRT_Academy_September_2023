@@ -25,7 +25,7 @@ Create An Contact In Salesforce
     Type Text             Email                       sept.academy.crt.2023@outlook.com
     Click Text            Save                        partial_match=false
     Use Modal             Off
-    Verify Text           Hidde Visser
+    Verify Text           ${contact_first_name} ${contact_last_name}
 
 Create a Case
     [Documentation]
@@ -52,6 +52,7 @@ Verify email received with case number
     SwitchWindow          2
     GoTo                  https://outlook.live.com/mail/0/
     ClickText             Sign in to your account
+    VerifyText            to continue to Outlook
     TypeText              Email, phone, or Skype      ${outlook_username}
     ClickText             Next
     TypeSecret            Password                    ${outlook_password}
