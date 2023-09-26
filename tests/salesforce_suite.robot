@@ -7,8 +7,8 @@ Suite Setup               Setup Browser
 Suite Teardown            End suite
 
 *** Variables ***
-${contact_first_name}    Hidde
-${contact_last_name}    Training
+${contact_first_name}     Hidde
+${contact_last_name}      Training
 
 
 *** Test Cases ***
@@ -40,11 +40,11 @@ Create a Case
     ClickCheckbox         Send notification email to contact                      on
     ClickText             Save                        partial_match=False
     UseModal              Off
-    VerifyText    Thank you for contacting us with your inquiriy.
+    VerifyText            Thank you for contacting us with your inquiriy.
     ${case_number}        GetFieldValue               Case Number
     Set Suite Variable    ${case_number}
     Log To Console        ${case_number}
-    
+
 Verify email received with case number
     [Documentation]
     [Tags]
@@ -70,22 +70,42 @@ Verify email received with case number
     ClickText             Reply                       partial_match=False
 
 
-    TypeText    //*[@id\='editorParent_1']/div[1]    Thanks for the update!
-    ClickText    Send    anchor=Press Alt+Down for more options
+    TypeText              //*[@id\='editorParent_1']/div[1]                       Thanks for the update!
+    ClickText             Send                        anchor=Press Alt+Down for more options
 
 Verify email update in Salesforce
     [Documentation]
     [Tags]
-    SwitchWindow    1
-
+    SwitchWindow          1
     RefreshPage
+    VerifyText            Thanks for the update!
+
+Cleanup
+    [Documentation]
+    [Tags]
+    #Delete the case
+    ClickText             Delete
+    UseModal              On
+    VerifyText            Are you sure you want to delete this case?
+    ClickText             Delete                      anchor=Cancel
+    IsNoText              ${case_number}
+
+    #Delete contact
+    LaunchApp             Contacts
+    ClickText             ${contact_first_name} ${contact_last_name}
+    ClickText             Show more actions
+    ClickText             Delete
+    UseModal              On
+    ClickText             Delete
+    VerifyNoText          ${contact_first_name} ${contact_last_name}    timeout=15s
+
 
 Delete Contact
-    Appstate    Home
-    LaunchApp    Contacts
-    ClickText    Hidde Visser
-    ClickText    Show more actions
-    ClickText    Delete
-    UseModal    On
-    ClickText    Delete
-    VerifyNoText    Hidde Visser    timeout=15s
+    Appstate              Home
+    LaunchApp             Contacts
+    ClickText             Hidde Visser
+    ClickText             Show more actions
+    ClickText             Delete
+    UseModal              On
+    ClickText             Delete
+    VerifyNoText          Hidde Visser                timeout=15s
