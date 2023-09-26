@@ -98,14 +98,3 @@ Cleanup
     UseModal              On
     ClickText             Delete
     VerifyNoText          ${contact_first_name} ${contact_last_name}    timeout=15s
-
-
-Delete Contact
-    Appstate              Home
-    LaunchApp             Contacts
-    ClickText             Hidde Visser
-    ClickText             Show more actions
-    ClickText             Delete
-    UseModal              On
-    ClickText             Delete
-    VerifyNoText          Hidde Visser                timeout=15s
