@@ -6,8 +6,13 @@ Resource                  ../resources/keywords.robot
 Suite Setup               Setup Browser
 Suite Teardown            End suite
 
+*** Variables ***
+${contact_first_name}    Hidde
+${contact_last_name}    Training
+
+
 *** Test Cases ***
-Create An Account In Salesforce
+Create An Contact In Salesforce
     [Tags]                Account
     Home
     Launch App            Sales
@@ -15,8 +20,8 @@ Create An Account In Salesforce
     VerifyText            Add to Campaign
     Click Text            New
     Use Modal             On
-    Type Text             First Name                  Hidde
-    Type Text             Last Name                   Visser
+    Type Text             First Name                  ${contact_first_name}
+    Type Text             Last Name                   ${contact_last_name}
     Type Text             Email                       sept.academy.crt.2023@outlook.com
     Click Text            Save                        partial_match=false
     Use Modal             Off
@@ -30,7 +35,7 @@ Create a Case
     VerifyText            Case Number
     ClickText             New
     UseModal              On
-    ComboBox              Search Contacts...          Hidde Visser
+    ComboBox              Search Contacts...          ${contact_first_name} ${contact_last_name}
     PickList              *Case Origin                Email
     ClickCheckbox         Send notification email to contact                      on
     ClickText             Save                        partial_match=False
