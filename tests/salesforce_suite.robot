@@ -7,7 +7,6 @@ Suite Setup               Setup Browser
 Suite Teardown            End suite
 
 *** Test Cases ***
-*** Test Cases ***
 Create An Account In Salesforce
     [Tags]                Account
     Home
@@ -28,6 +27,7 @@ Create a Case
     [Tags]
     Appstate              Home
     LaunchApp             Cases
+    VerifyText            Case Number
     ClickText             New
     UseModal              On
     ComboBox              Search Contacts...          Hidde Visser
@@ -72,6 +72,8 @@ Verify email update in Salesforce
     [Documentation]
     [Tags]
     SwitchWindow    1
+
+    RefreshPage
 
 Delete Contact
     Appstate    Home
