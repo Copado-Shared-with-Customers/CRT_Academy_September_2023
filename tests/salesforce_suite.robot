@@ -77,7 +77,13 @@ Verify email update in Salesforce
     [Documentation]
     [Tags]
     SwitchWindow          1
-    RefreshPage
+    ${updated_received}    IsText    this does not exist!    timeout=2s
+    
+    WHILE    '${updated_received}' == 'False'    limit=20
+        RefreshPage
+        ${updated_received}    IsText    Thanks for the update!    timeout=3s
+    END
+    
     VerifyText            Thanks for the update!
 
 Cleanup
@@ -88,7 +94,7 @@ Cleanup
     UseModal              On
     VerifyText            Are you sure you want to delete this case?
     ClickText             Delete                      anchor=Cancel
-    IsNoText              ${case_number}
+    IsNoText              ${case_number}              timeout=15s
 
     #Delete contact
     LaunchApp             Contacts
